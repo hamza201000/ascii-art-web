@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 	"text/template"
+
+	"asciart/asciart"
 )
 
 type PageData struct {
@@ -20,13 +22,14 @@ func greethandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	name := r.FormValue("name")
-	data := PageData{Name: name}
-	tmpl := template.Must(template.ParseFiles("template/greet.html"))
+	// fmt.Println(name)
+	data := PageData{Name: asciart.Fmain(name)}
+	tmpl := template.Must(template.ParseFiles("template/basic.html"))
 	tmpl.Execute(w, data)
 }
 
 func main() {
 	http.HandleFunc("/", handler)
-	http.HandleFunc("/greet", greethandler)
+	http.HandleFunc("/ascii", greethandler)
 	http.ListenAndServe(":8080", nil)
 }

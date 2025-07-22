@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello</title>
+    <title>Print ascii</title>
 </head>
 <body>
-    <h1>enter your name</h1>
-    <form action="/greet" method="post">
-        <input type="text" name="name" placeholder="Your name" required />
+    <form action="/ascii"  method="post">
+  <textarea id="inputText" name="name" style="width:234px;">Type Something</textarea>
         <button type="submit">Submit</button>
     </form>
+   <pre>{{.Name}}</pre>
     <p>Welcome to your dynamic web page.</p>
 </body>
 </html>
