@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"text/template"
 
@@ -12,6 +13,10 @@ type PageData struct {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
 	tmpl := template.Must(template.ParseFiles("template/basic.html"))
 	tmpl.Execute(w, nil)
 }
@@ -22,7 +27,6 @@ func greethandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	name := r.FormValue("name")
-	// fmt.Println(name)
 	data := PageData{Name: asciart.Fmain(name)}
 	tmpl := template.Must(template.ParseFiles("template/basic.html"))
 	tmpl.Execute(w, data)
@@ -31,5 +35,7 @@ func greethandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/ascii", greethandler)
+	log.Println("Server running on: http://localhost:8080")
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.ListenAndServe(":8080", nil)
 }
