@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+	"time"
 
 	"asciart/asciart"
 )
@@ -26,10 +27,15 @@ func greethandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
+	start := time.Now() // Start timer here
+
 	name := r.FormValue("name")
 	data := PageData{Name: asciart.Fmain(name)}
 	tmpl := template.Must(template.ParseFiles("template/basic.html"))
 	tmpl.Execute(w, data)
+
+	elapsed := time.Since(start).Seconds()
+	log.Printf("Handled /ascii in %.3f seconds\n", elapsed)
 }
 
 func main() {

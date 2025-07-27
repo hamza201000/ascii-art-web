@@ -46,5 +46,6 @@ func Fmain(s string) string {
 	// newstring := strings.Split(s, "\n")
 
 	// Print the ASCII art for the input string
+
 	return PrintAsci(newstring, asci_table)
 }

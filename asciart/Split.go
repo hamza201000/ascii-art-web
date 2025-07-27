@@ -11,7 +11,7 @@ func Split_with_new_line(str string) ([]string, error) {
 
 	str = strings.ReplaceAll(str, "\r\n", "\n") // Replace literal "\n" with actual newline
 	for i := 0; i < len(str); i++ {
-		if str[i]!='\n'&&(str[i]<32||str[i]>126){
+		if str[i] != '\n' && (str[i] < 32 || str[i] > 126) {
 			continue
 		}
 		if str[i] == '\n' {
