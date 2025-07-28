@@ -5,11 +5,22 @@
     <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
+    
+   
     <form action="/ascii"  method="post">
-  <textarea id="inputText" name="name" style="width:234px;">Type Something</textarea>
+        <a>Please chosse a font:</a>
+         <select name="mySelect">
+            <option value="standard">standard</option>
+        <option value="shadow">shadow</option>
+        <option value="thinkertoy">thinkertoy</option>
+    </select id="myselect">
+    <br>
+    <br>
+  <textarea id="inputText" name="name" maxlength="10000" placeholder="Type Something (max 10000 chars)"></textarea>
+  <br><br>
         <button type="submit">Submit</button>
     </form>
-   <pre>{{.Name}}</pre>
+   <pre>{{.}}</pre>
     <p>Welcome to your dynamic web page.</p>
 </body>
 </html>

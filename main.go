@@ -9,10 +9,6 @@ import (
 	"asciart/asciart"
 )
 
-type PageData struct {
-	Name string
-}
-
 func handler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -28,12 +24,11 @@ func greethandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	start := time.Now() // Start timer here
-
 	name := r.FormValue("name")
-	data := PageData{Name: asciart.Fmain(name)}
+	Banner := r.FormValue("mySelect")
+	data := asciart.Fmain(name, Banner)
 	tmpl := template.Must(template.ParseFiles("template/basic.html"))
 	tmpl.Execute(w, data)
-
 	elapsed := time.Since(start).Seconds()
 	log.Printf("Handled /ascii in %.3f seconds\n", elapsed)
 }

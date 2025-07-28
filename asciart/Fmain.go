@@ -6,23 +6,21 @@ import (
 	"os"
 )
 
-func Fmain(s string) string {
+func Fmain(s, banner string) string {
 	// Check if the correct number of arguments is provided
 	// if len(os.Args) != 2 {
 	// 	fmt.Println("Usage : go run main.go \"Your text here\"")
 	// 	return
 	// }
 	// Try to open the font files in order: standard, shadow, thinkertoy
-	file, err := os.Open("standard.txt")
+	if banner != "standard" && banner != "shadow" && banner != "thinkertoy" {
+		return ""
+	}
+
+	file, err := os.Open(banner + ".txt")
 	if err != nil {
-		file, err = os.Open("shadow.txt")
-		if err != nil {
-			file, err = os.Open("thinkertoy.txt")
-			if err != nil {
-				fmt.Println("Error: failed to open any files")
-				return ""
-			}
-		}
+		fmt.Println("Error: failed to open any files")
+		return ""
 	}
 	// Ensure the file is closed after finishing
 	defer file.Close()
