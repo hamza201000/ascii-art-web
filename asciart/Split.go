@@ -1,7 +1,8 @@
 package asciart
 
-import "strings"
-
+import (
+	"strings"
+)
 // Split_with_new_line splits the input string by newline characters and returns a slice of lines.
 func Split_with_new_line(str string) ([]string, error) {
 	word := []string{}
@@ -12,7 +13,7 @@ func Split_with_new_line(str string) ([]string, error) {
 	str = strings.ReplaceAll(str, "\r\n", "\n") // Replace literal "\n" with actual newline
 	for i := 0; i < len(str); i++ {
 		if str[i] != '\n' && (str[i] < 32 || str[i] > 126) {
-			continue
+			return nil, err
 		}
 		if str[i] == '\n' {
 			word = append(word, temp_str)
