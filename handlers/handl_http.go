@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"asciart/asciart"
@@ -18,7 +19,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		render(w, http.StatusMethodNotAllowed)
 		return
 	}
-	tmpl := template.Must(template.ParseFiles("template/index.html"))
+	tmpl, err := template.ParseFiles("template/index.html")
+	if err != nil {
+		render(w, 500)
+		return
+	}
 	tmpl.Execute(w, nil)
 }
 
@@ -39,8 +44,30 @@ func Greethandler(w http.ResponseWriter, r *http.Request) {
 		render(w, status_code)
 		return
 	}
-	tmpl := template.Must(template.ParseFiles("template/index.html"))
+	tmpl, err := template.ParseFiles("template/index.html")
+	if err != nil {
+		render(w, 500)
+		return
+	}
 	tmpl.Execute(w, data)
 	elapsed := time.Since(start).Seconds()
 	log.Printf("Handled /ascii in %.3f seconds\n", elapsed)
+}
+
+func HandlerStatic(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		render(w, 400)
+		return
+	} else {
+		info, err := os.Stat(r.URL.Path[1:])
+		if err != nil {
+			render(w, http.StatusNotFound)
+			return
+		} else if info.IsDir() {
+			render(w, http.StatusForbidden)
+			return
+		} else {
+			http.ServeFile(w, r, r.URL.Path[1:])
+		}
+	}
 }

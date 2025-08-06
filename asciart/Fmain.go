@@ -14,7 +14,7 @@ func Fmain(s, banner string) (string, int) {
 	// }
 	// Try to open the font files in order: standard, shadow, thinkertoy
 	if banner != "standard" && banner != "shadow" && banner != "thinkertoy" {
-		return "", 400
+		return "", 404
 	}
 
 	file, err := os.Open(banner + ".txt")
@@ -36,7 +36,7 @@ func Fmain(s, banner string) (string, int) {
 	// Split the input string by new lines
 	newstring, err := Split_with_new_line(s)
 	if err != nil {
-		return "", 400
+		return "", 404
 	}
 	// fmt.Println(s)
 	// newstring := strings.Split(s, "\n")
