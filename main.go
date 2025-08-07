@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -12,5 +13,9 @@ func main() {
 	http.HandleFunc("/ascii-art", handlers.Greethandler)
 	http.HandleFunc("/static/", handlers.HandlerStatic)
 	log.Println("Server running on: http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+if err:=http.ListenAndServe(":8080", nil);err!=nil{
+	fmt.Print("internal server.")
+	return 
+}
+	
 }

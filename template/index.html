@@ -8,19 +8,17 @@
     
    
     <form action="/ascii-art"  method="post">
-        <a>Please chosse a font:</a>
-        <select name="mySelect">
+        <label for="myselect">Please chosse a font:</label>
+        <select name="mySelect" id="myselect">
         <option value="standard">standard</option>
         <option value="shadow">shadow</option>
         <option value="thinkertoy">thinkertoy</option>
-    </select id="myselect">
-    <br>
-    <br>
+    </select >
+    
   <textarea id="inputText" name="name" maxlength="10000" placeholder="Type Something (max 10000 chars)"></textarea>
-  <br><br>
+  
         <button type="submit">Submit</button>
     </form>
    <pre>{{.}}</pre>
-    <p>Welcome to your dynamic web page.</p>
 </body>
 </html>

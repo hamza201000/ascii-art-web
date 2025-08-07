@@ -2,29 +2,32 @@ package handlers
 
 import (
 	"html/template"
-	"log"
 	"net/http"
 	"os"
-	"time"
 
 	"asciart/asciart"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		render(w, http.StatusNotFound)
-		return
-	}
 	if r.Method != http.MethodGet {
 		render(w, http.StatusMethodNotAllowed)
 		return
 	}
+	if r.URL.Path != "/" {
+		render(w, http.StatusNotFound)
+		return
+	}
+
 	tmpl, err := template.ParseFiles("template/index.html")
 	if err != nil {
 		render(w, 500)
 		return
 	}
-	tmpl.Execute(w, nil)
+	if err := tmpl.Execute(w, nil); err != nil {
+		render(w, http.StatusNotFound)
+		return
+
+	}
 }
 
 func Greethandler(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +35,6 @@ func Greethandler(w http.ResponseWriter, r *http.Request) {
 		render(w, 400)
 		return
 	}
-	start := time.Now() // Start timer here
 	if len(r.FormValue("name")) > 10000 {
 		render(w, 400)
 		return
@@ -49,9 +51,10 @@ func Greethandler(w http.ResponseWriter, r *http.Request) {
 		render(w, 500)
 		return
 	}
-	tmpl.Execute(w, data)
-	elapsed := time.Since(start).Seconds()
-	log.Printf("Handled /ascii in %.3f seconds\n", elapsed)
+	if err := tmpl.Execute(w, data); err != nil {
+		render(w, http.StatusNotFound)
+		return
+	}
 }
 
 func HandlerStatic(w http.ResponseWriter, r *http.Request) {
@@ -71,3 +74,4 @@ func HandlerStatic(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
