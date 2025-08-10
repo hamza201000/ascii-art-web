@@ -7,15 +7,16 @@
 <body>
     
    
-    <form action="/ascii-art"  method="post">
+    <form action="/ascii-art"  method="post" class="overlay">
         <label for="myselect">Please chosse a font:</label>
+        
         <select name="mySelect" id="myselect">
-        <option value="standard">standard</option>
-        <option value="shadow">shadow</option>
-        <option value="thinkertoy">thinkertoy</option>
+        <option class="op" value="standard">standard</option>
+        <option class="op" value="shadow">shadow</option>
+        <option class="op" value="thinkertoy">thinkertoy</option>
     </select >
     
-  <textarea id="inputText" name="name" maxlength="10000" placeholder="Type Something (max 10000 chars)"></textarea>
+  <textarea class="pro-textarea" id="inputText" name="name" maxlength="10000" placeholder="Type Something (max 10000 chars)"></textarea>
   
         <button type="submit">Submit</button>
     </form>
