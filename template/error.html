@@ -1,12 +1,21 @@
+<!-- Error page template for displaying error messages -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>page error</title>
+    <!-- Link to external CSS file for styling -->
     <link rel="stylesheet" href="/static/style.css"/>
 </head>
-<body>
-    <h2>{{.Status}}</h2>
-    <p>{{.Message}}</p>
-    <a href="/">Return to home</a>
+<body >
+    <div class="error">
+   <img src="/static/image-error.png" class="img">
+    <!-- Display the error status code -->
+     
+    <h2 >{{.Status}}</h2>
+    <!-- Display the error message -->
+    <p >{{.Message}}</p>
+    <!-- Link to return to the home page -->
+    <a  href="/" >Return to home</a>
+    </div>
 </body>
 </html>

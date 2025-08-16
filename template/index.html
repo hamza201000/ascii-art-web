@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Print ascii-art</title>
-    <link rel="stylesheet" href="/static/style.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>ASCII Art Web Stylize</title>
+  <link rel="stylesheet" href="/static/style.css">
+
 </head>
 <body>
-    
-   
-    <form action="/ascii-art"  method="post" class="overlay">
-        <label for="myselect">Please chosse a font:</label>
+  <div class="container">
+    <h1>PRINT ASCII ART</h1>
+    <form action="/ascii-art" method="post">
+      <label for="font">Please chosse a font</label>
+      <select id="font" name="mySelect">
         
-        <select name="mySelect" id="myselect">
-        <option class="op" value="standard">standard</option>
-        <option class="op" value="shadow">shadow</option>
-        <option class="op" value="thinkertoy">thinkertoy</option>
-    </select >
-    
-  <textarea class="pro-textarea" id="inputText" name="name" maxlength="10000" placeholder="Type Something (max 10000 chars)"></textarea>
-  
-        <button type="submit">Submit</button>
+        <option value="standard">Standard</option>
+        <option value="shadow">Shadow</option>
+        <option value="thinkertoy">Thinkertoy</option>
+      </select>
+      
+      <textarea id="inputText" name="name" rows="6" maxlength="10000" placeholder="Type Something (max 10000 chars)"></textarea>
+      <div>
+        <input type="submit" value="submit">
+        <input type="reset" value="reset">
+      </div>
     </form>
-   <pre>{{.}}</pre>
-</body>
-</html>
+
+    <div class="output">
+       <pre>{{.}}</pre>
+    </div>
+  </div>

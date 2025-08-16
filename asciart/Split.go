@@ -1,7 +1,6 @@
 package asciart
 
 import (
-	"errors"
 	"strings"
 )
 
@@ -15,7 +14,7 @@ func Split_with_new_line(str string) ([]string, error) {
 	str = strings.ReplaceAll(str, "\r\n", "\n") // Replace literal "\n" with actual newline
 	for i := 0; i < len(str); i++ {
 		if str[i] != '\n' && (str[i] < 32 || str[i] > 126) {
-			return nil, errors.New("you have to write a valid character from 32 to 126 in the ASCII table")
+			continue
 		}
 		if str[i] == '\n' {
 			word = append(word, temp_str)
